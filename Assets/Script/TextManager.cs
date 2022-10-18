@@ -29,12 +29,21 @@ public class TextManager : MonoBehaviour
         }
     }
 
+    private Coroutine _currentCor;
+    /// <summary>
+    /// テキストを更新する
+    /// </summary>
+    /// <param name="index"></param>
     private void TextUpdate(int index)
     {
         _text.text = "";
-        if (_text != null && _textDataScriptable?.Texts[index] != null)
+        if (_text != null && _textDataScriptable.Texts[index] != null)
         {
-            StartCoroutine(TextCor(_textDataScriptable?.Texts[index]));
+            if(_currentCor != null)
+            {
+                StopCoroutine(_currentCor);
+            }
+            _currentCor = StartCoroutine(TextCor(_textDataScriptable?.Texts[index], _waitTime));
         }
         else
         {
@@ -42,24 +51,27 @@ public class TextManager : MonoBehaviour
         }
     }
 
-    IEnumerator TextCor(string text)
+    /// <summary>
+    /// 引数の文字列を_waitTimeずつ表示する
+    /// </summary>
+    /// <param name="text"></param>
+    /// <returns></returns>
+    IEnumerator TextCor(string text, float waitTime)
     {
-        Debug.Log("Cor");
         bool isFinish = false;
         int index = 0;
         _text.text += text[index];
 
-        while (isFinish)
+        while (isFinish == false)
         {
-            Debug.Log(text[index]);
-            yield return new WaitForSeconds(_waitTime);
+            yield return new WaitForSeconds(waitTime);
             index++;
+            if (index >= text.Length)
+            {
+                yield break;
+            }
             _text.text += text[index];
 
-            if(index > text.Length)
-            {
-                isFinish = true;
-            }
         }
     }
 }

@@ -154,7 +154,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _textDataScriptable: {fileID: 11400000, guid: b656fa92430711440a42b097840615c1, type: 2}
   _text: {fileID: 2002833802}
-  _waitTime: 0.1
+  _waitTime: 0.05
 --- !u!4 &733926010
 Transform:
   m_ObjectHideFlags: 0
@@ -399,7 +399,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
